@@ -14,6 +14,8 @@ Word2Vec、BGE
 ### 大语言模型
 Llama（meta）、ChatGPT（openAI）、ChatGLM（清华）、Qwen（阿里）、DeepSeek
 
+### 名词解释
+
 
 ### 多模态
 MiniCPM
