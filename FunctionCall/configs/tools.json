@@ -1,0 +1,10 @@
+[
+  {
+    "name": "get_weather",
+    "description": "根据地理位置查询天气",
+    "parameters": {
+      "location": "string",
+      "unit": "string"
+    }
+  }
+]
