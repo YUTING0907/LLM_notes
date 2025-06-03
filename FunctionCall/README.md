@@ -29,9 +29,9 @@
 │   └── function_call_model/     # 本地模型权重保存目录
 ├── requirements.txt             # 项目依赖
 └── README.md                    # 当前文件
-
+```
 ## 快速开始
-🚀 1. 准备训练数据
+### 🚀 1. 准备训练数据
 data/train.json
 ```
 {
@@ -48,7 +48,7 @@ data/train.json
 构造方法：
 将任意问句（instruction）人工对齐目标函数（name）和参数（parameters），即可组成训练数据。
 
-🛠️ 2. 微调模型
+### 🛠️ 2. 微调模型
 使用 LoRA + PEFT + Transformers 对模型进行指令微调。
 
 scripts/train_sft.py 中调用训练数据：
@@ -63,7 +63,7 @@ CUDA_VISIBLE_DEVICES=0 python scripts/train_sft.py \
     --num_train_epochs 3
 ```
 
-🧪 3. 推理阶段：Function Call 多轮对话
+### 🧪 3. 推理阶段：Function Call 多轮对话
 python examples/test_infer.py
 
 流程：
@@ -78,7 +78,7 @@ python examples/test_infer.py
 
 展示执行结果，并继续下一轮问答（如：“还想知道其他城市的天气吗？”）；
 
-🧰 4. 工具执行模拟（可替换为真实 API）
+### 🧰 4. 工具执行模拟（可替换为真实 API）
 ```
 def fake_tool_executor(call: dict):
     if call["name"] == "get_weather":
@@ -86,5 +86,5 @@ def fake_tool_executor(call: dict):
 ```
 也可以替换为真实 API，比如天气接口、数据库查询等。
 
-🗣️ 5. 多轮对话处理
+### 🗣️ 5. 多轮对话处理
 test_infer.py 中支持上下文维护，可以通过将 历史问答 拼接到 Prompt 实现上下文增强，或者使用 memory 类封装。
