@@ -113,10 +113,23 @@ Function Call 即 LLM 调用外部工具/函数完成复杂任务，如调用日
 
 ### 主流分词算法
 
-- BPE（Byte Pair Encoding）
-- WordPiece（BERT 使用）
-- Unigram Language Model（SentencePiece）
-- Byte-level BPE（GPT-2、GPT-3 使用）
+| 算法名称               | 基于   | 词表大小 | 多语言支持 | OOV 处理 | 应用模型            |
+| ------------------ | ---- | ---- | ----- | ------ | --------------- |
+| **BPE**（Byte Pair Encoding）  | 频率合并 | 中    | 一般    | 良好     | GPT-2、RoBERTa   |
+| **WordPiece**      | 语言模型 | 中等   | 较差    | 良好     | BERT、DistilBERT |
+| **Unigram LM** （SentencePiece） | 概率建模 | 小    | 优秀    | 最佳     | T5、XLNet、mBART  |
+| **Byte-level BPE** | 字节处理 | 小    | 极佳    | 最佳     | GPT-3、ChatGPT   |
+
+BPE 是一种数据压缩启发式分词方法。最初被用于图像压缩领域，后被 NLP 借鉴。
+初始将文本分割为 字符级别 token；
+统计所有相邻字符对的出现频率；
+每次选择频率最高的字符对，将其 合并为新 token；
+不断迭代，直到达到预设词表大小。
+
+Byte-level BPE 是 GPT 系列使用的分词器，它在标准 BPE 上进行了修改：
+对每个字符按字节处理（Unicode 编码），包括空格、标点；
+再进行 BPE 合并操作；
+支持几乎所有语言字符集，避免编码失败。
 
 ---
 
