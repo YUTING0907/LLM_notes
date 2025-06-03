@@ -15,7 +15,7 @@ Word2Vec、BGE
 Llama（meta）、ChatGPT（openAI）、ChatGLM（清华）、Qwen（阿里）、DeepSeek
 
 ### 名词解释
-
+[名词解释](https://github.com/YUTING0907/LLM_notes/blob/main/名词解释.md)
 
 ### 多模态
 MiniCPM
