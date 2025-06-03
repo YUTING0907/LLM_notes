@@ -65,6 +65,7 @@ Embedding 是什么？你们用的那个模型？
 ### 任务定义
 
 Function Call 即 LLM 调用外部工具/函数完成复杂任务，如调用日历、查询数据库、发送请求等。
+利用现有的框架进行 Function Call（函数调用）训练，本质是通过 指令微调（Instruction Tuning） 或 函数调用微调（Function Calling Fine-tuning） 方式，让模型学会识别用户意图并输出结构化函数调用格式（JSON)
 
 ### 训练方式
 
