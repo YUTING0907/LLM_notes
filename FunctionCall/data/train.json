@@ -1,0 +1,12 @@
+{
+  "input": "今天天气怎么样？",
+  "output": {
+    "function_call": {
+      "name": "get_weather",
+      "arguments": {
+        "location": "北京",
+        "unit": "Celsius"
+      }
+    }
+  }
+}
