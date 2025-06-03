@@ -1,0 +1,8 @@
+{
+  "conversation": [
+    {"role": "user", "content": "你好，能帮我查一下快递吗？"},
+    {"role": "assistant", "content": "您好，请提供快递单号。"},
+    {"role": "user", "content": "顺丰123456789"},
+    {"role": "assistant", "content": "好的，正在为您查询，请稍等..."}
+  ]
+}
