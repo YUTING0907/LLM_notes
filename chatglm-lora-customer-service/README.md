@@ -42,7 +42,7 @@ python src/infer.py --mode single --query "你们的退货政策是怎样的？"
 python src/infer.py --mode interactive
 
 # 4.用于将 LoRA 微调后的参数合并到原始 ChatGLM 模型中并保存为单一权重：
-```
+
 python scripts/convert_lora.py \
     --base_model THUDM/chatglm2-6b \
     --lora_model ./output/lora \
