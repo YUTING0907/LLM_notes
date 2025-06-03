@@ -1,0 +1,9 @@
+torch>=1.12.0
+transformers>=4.30.0
+peft>=0.3.0
+datasets>=2.11.0
+accelerate>=0.21.0
+numpy>=1.23.0
+sentencepiece>=0.1.99
+# 视情况添加，如使用CUDA时需要匹配torch版本
+# 例如：torch==1.13.1+cu117 -f https://download.pytorch.org/whl/torch_stable.html
