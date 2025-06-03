@@ -1,10 +1,25 @@
 [
   {
     "name": "get_weather",
-    "description": "根据地理位置查询天气",
+    "description": "Get the current weather of a specified city.",
     "parameters": {
-      "location": "string",
-      "unit": "string"
+      "city": {
+        "type": "string",
+        "description": "Name of the city.",
+        "required": true
+      }
+    }
+  },
+  
+  {
+    "name": "get_time",
+    "description": "Get the current time for a location.",
+    "parameters": {
+      "location": {
+        "type": "string",
+        "description": "Target location.",
+        "required": true
+      }
     }
   }
 ]
