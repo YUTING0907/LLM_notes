@@ -5,6 +5,145 @@ Function Call 是怎么训练的？
 大模型分词器是什么？
 Embedding 是什么？你们用的那个模型？
 
+# 💡 LLM 基础知识详解
+
+## 1. 🧠 大模型是怎么训练出来的？
+
+大语言模型（LLM）的训练通常分为以下几个阶段：
+
+### ① 数据准备
+
+- **文本清洗**：去除低质量、重复、违法内容
+- **去重/分词/格式化**：统一编码、语言标识
+- **多语种数据处理**：构建语言比例（如中英比 2:8）
+- **Tokenization**：使用自定义分词器转为 Token 序列
+
+### ② 预训练（Pretraining）
+
+- 目标：让模型学习语言本身的结构、语义、常识
+- 常见任务：
+  - **Causal Language Modeling (CLM)**：如 GPT 系列，只看前文预测下一个 token
+  - **Masked Language Modeling (MLM)**：如 BERT，随机 mask 输入部分 token 并预测它们
+- 数据量：通常需要数百 GB 到数 TB 的文本数据
+- 训练过程：
+  - 使用分布式并行技术（数据并行、模型并行、流水线并行）
+  - FP16 / BF16 混合精度加速训练
+  - 使用 AdamW 优化器、warmup + cosine decay 学习率调度
+
+### ③ 微调（Fine-tuning）
+
+- **SFT（监督微调）**：加入人工标注的 QA、指令跟随等数据
+- **RLHF（人类反馈强化学习）**：
+  - 收集成对偏好数据（A vs B 哪个回答好）
+  - 用奖励模型评分，用 PPO（Proximal Policy Optimization）进行强化学习
+- **DPO（Direct Preference Optimization）**：一种稳定、无需训练奖励模型的直接优化方法
+
+---
+
+## 2. 🏗️ Transformer 架构与 Encoder / Decoder 区别
+
+### Transformer 核心组件
+
+- **Self-Attention**：每个 token 关注输入序列中所有位置
+- **Multi-Head Attention**：多组 attention 并行学习不同子空间信息
+- **Feed-Forward Network**：非线性变换增强模型表达力
+- **Residual Connection** + LayerNorm：稳定训练过程
+- **Positional Encoding**：加入位置信息
+
+### Encoder vs Decoder
+
+| 构件      | Encoder                                 | Decoder                                 |
+|-----------|------------------------------------------|------------------------------------------|
+| 输入类型  | 全部可见输入                            | 自回归输入（仅当前及之前 token 可见）  |
+| 用途      | 理解任务（如分类、摘要）                | 生成任务（如翻译、对话、写作）          |
+| 特征      | 双向注意力（BERT）                      | 单向注意力 + Encoder-Decoder 注意力（GPT）|
+
+---
+
+## 3. 📞 Function Call 是怎么训练的？
+
+### 任务定义
+
+Function Call 即 LLM 调用外部工具/函数完成复杂任务，如调用日历、查询数据库、发送请求等。
+
+### 训练方式
+
+- **添加监督数据**：构造输入→输出是函数名 + 参数的 JSON（如 OpenAI Function Call 数据）
+- **训练过程**：
+  - 基于原始指令微调模型，使其学会输出结构化函数调用格式
+  - 引入工具描述作为提示模板（Tool Use Prompting）
+
+### 推理流程
+
+1. 用户发出请求（如“查明天北京天气”）
+2. 模型输出函数调用：
+   ```json
+   {
+     "function": "get_weather",
+     "arguments": {"city": "北京", "date": "2025-05-29"}
+   }
+3.系统调用后端 API 获取结果
+
+4.模型继续对响应内容生成最终回复
+
+## 4. 🔧 微调方案有哪些？你是否做过？
+
+### 常见微调方法
+
+| 方法类型            | 描述                                           |
+|---------------------|------------------------------------------------|
+| Full Fine-tuning     | 全量参数微调，效果最好但资源消耗大               |
+| LoRA / QLoRA         | 参数高效微调，仅更新小量 Adapter 参数             |
+| PEFT                 | PEFT 是 Parameter-Efficient Fine-Tuning 的统称   |
+| Prompt-tuning / P-tuning v2 | 仅训练可学习的 Prompt 嵌入向量                     |
+
+### 实践经验
+
+✅ 使用过 LoRA 对 ChatGLM 微调客服对话任务，包含数据标注、训练、部署全过程。
+
+---
+
+## 5. 🧩 大模型分词器是什么？
+
+### 功能作用
+
+- 将文本编码为 token id（整数），输入模型处理
+- 控制序列长度，提高编码效率
+
+### 主流分词算法
+
+- BPE（Byte Pair Encoding）
+- WordPiece（BERT 使用）
+- Unigram Language Model（SentencePiece）
+- Byte-level BPE（GPT-2、GPT-3 使用）
+
+---
+
+## 6. 🧬 什么是 Embedding？你们使用哪个模型？
+
+### 定义
+
+Embedding 是将文本/句子转为稠密向量，用于语义计算。
+
+### 应用场景
+
+- 检索（Semantic Search）
+- 聚类、分类
+- 相似度计算
+
+### 常用模型
+
+- `text-embedding-ada-002`：OpenAI 提供的多语言模型
+- `bge-large-zh`：中文语义检索效果佳
+- `m3e-base`：多任务中文模型，覆盖分类/搜索/问答等任务
+
+---
+
+> 📝 注：如需生成 PDF 或插入图示、模型结构图，请继续告知。
+
+
+
+
 Lib：
 介绍一下 langchian
 介绍一下 autogen
