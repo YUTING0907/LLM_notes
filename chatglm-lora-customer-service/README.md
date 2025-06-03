@@ -1,6 +1,7 @@
-# 🤖 ChatGLM 客服对话微调项目 (LoRA + Function Call)
 
-本项目基于 ChatGLM 模型，使用 LoRA 技术完成客服对话任务的指令微调，支持结构化 Function Call、多轮交互，并可部署为 API 服务。
+# ChatGLM LoRA 客服对话微调项目
+
+本项目基于 ChatGLM2 + LoRA 实现客服对话的微调与部署，支持数据标注 → LoRA 微调 → 推理部署全流程。
 
 ---
 
@@ -21,3 +22,16 @@ chatglm-lora-customer-service/
 ├── requirements.txt
 └── README.md
 ```
+
+## 快速开始
+
+```bash
+# 1. 安装依赖
+pip install -r requirements.txt
+
+# 2. 开始训练
+python src/train.py
+
+# 3. 推理验证
+python src/infer.py
+
