@@ -88,3 +88,29 @@ def fake_tool_executor(call: dict):
 
 ### 🗣️ 5. 多轮对话处理
 test_infer.py 中支持上下文维护，可以通过将 历史问答 拼接到 Prompt 实现上下文增强，或者使用 memory 类封装。
+
+### ✅ 6. 输出结果（示意）
+```
+You are an intelligent assistant. You can call tools in structured JSON format.
+
+### Tool: `get_weather`
+Get the current weather of a specified city.
+
+Parameters:
+- `city`: string (required). Name of the city.
+
+### Tool: `get_time`
+Get the current time for a location.
+
+Parameters:
+- `location`: string (required). Target location.
+
+Now, based on the following user request, decide which tool to call and provide the correct parameters in JSON format.
+
+User: 我想知道北京的天气
+
+Your answer must be in the format:
+```json
+{"name": "get_weather", "parameters": {"city": "北京"}}
+
+```
