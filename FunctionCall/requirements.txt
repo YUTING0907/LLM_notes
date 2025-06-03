@@ -1,0 +1,5 @@
+transformers>=4.39.0
+peft>=0.9.0
+datasets
+accelerate
+json5
