@@ -1,5 +1,13 @@
 # scripts/train_sft.py
-
+'''
+    # 示例命令
+CUDA_VISIBLE_DEVICES=0 python scripts/train_sft.py \
+    --base_model "Qwen/Qwen1.5-0.5B-Chat" \
+    --train_file ./data/train.json \
+    --output_dir ./sft_function_call_model \
+    --use_lora True \
+    --num_train_epochs 3
+'''
 import json
 import argparse
 from transformers import AutoTokenizer, AutoModelForCausalLM, TrainingArguments, Trainer, DataCollatorForSeq2Seq
