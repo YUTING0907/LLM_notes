@@ -87,6 +87,8 @@ Function Call 即 LLM 调用外部工具/函数完成复杂任务，如调用日
 
 4.模型继续对响应内容生成最终回复
 
+实践项目：https://github.com/YUTING0907/LLM_notes/edit/main/FunctionCall/README.md
+
 ## 4. 🔧 微调方案有哪些？你是否做过？
 
 ### 常见微调方法
@@ -101,6 +103,8 @@ Function Call 即 LLM 调用外部工具/函数完成复杂任务，如调用日
 ### 实践经验
 
 ✅ 使用过 LoRA 对 ChatGLM 微调客服对话任务，包含数据标注、训练、部署全过程。
+
+实践项目：https://github.com/YUTING0907/LLM_notes/edit/main/chatglm-lora-customer-service/README.md
 
 ---
 
